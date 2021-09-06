@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Simulador de compra Almacen de cosas dulces</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img class="logo-img" src="imagenes/bullvetti.png" alt="" />
+      </div>
+      <nav>
+        <div id="div-carrito"><p id="nro-carrito"></p></div>
+        <button id="carrito-toggle">mostrar carrito</button>
+        <img class="img-carrito" src="imagenes/carrito-de-compras.png" alt="" />
+      </nav>
+    </header>
+    <!--FORMULARIO DE REGISTRO DE USUARIO - MODAL-->
+    <div class="modal-container" id="modal_container">
+      <div class="modal">
+        <h2>Ingresá tus datos</h2>
+        <form id="myForm" action="">
+          <label>Nombre y apellido: </label>
+          <input type="text" id="nombreApellido" required />
+          <br />
+          <label>DNI: </label>
+          <input type="number" id="dni" required />
+          <br />
+          <label>Telefono: </label>
+          <input type="tel" id="tel" required />
+          <br />
+          <label>Email: </label>
+          <input type="email" id="email" required />
+          <div>
+            <button type="submit" id="btnSubmit">Enviar</button>
+            <button id="cerrar-modal">Cerrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <section class="compra">
+      <div id="carrito-modal">
+        <div id="carrito-total">
+          <table id="listado">
+            <thead>
+              <th>Producto</th>
+              <th>Precio</th>
+            </thead>
+          </table>
+        </div>
+        <div id="carrito">
+          <div id="mostrarTotal">
+            <div>
+              <button id="registrar-compra">Registrar compra</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h1 class="titulo1">Compras de salida inmediata</h1>
+        <p class="texto">
+          En esta sección encontrarás los productos que no requieren ser
+          programados con mas de 10 días de anticipación. Todos ellos son sin
+          tema personalizado de diseño y se encargan solo 48hs antes de la fecha
+          que deseada. <br />
+          En caso de buscar un diseño personalizado, contactanos para acordar
+          una fecha.
+        </p>
+      </div>
+      <div class="contenedor-tortas">
+        <h2 class="titulo2">Tortas</h2>
+        <div class="container-card"></div>
+        <div id="carrito-tortas"></div>
+      </div>
+      <div>
+        <h2 class="titulo2">Armá tu desayuno</h2>
+        <p class="texto">
+          Vas a encontrar una lista de todos los productos que podes elegir para
+          tus desayunos. Mini tortas y acompañamientos, dependiendo del tamaño
+          de desayno que vos quieras! <br />
+        </p>
+      </div>
+      <div class="contenedor-desayuno"></div>
+      <h3 class="subtitulo">Mini tortas</h3>
+      <div class="mini-tortas"></div>
+      <h3 class="subtitulo">Acompañamientos</h3>
+      <div class="acompañamiento"></div>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="getjson.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
