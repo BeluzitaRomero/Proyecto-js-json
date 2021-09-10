@@ -16,10 +16,9 @@ let imprimirTotal = document.createElement("p");
 
 $.getJSON(productosJSON, function (respuesta, estado) {
   if (estado === "success") {
-    let tortas = respuesta;
-    for (const dato of tortas) {
-      for (const torta of dato.tortas) {
-        $(".container-card").append(`
+    let tortas = respuesta.tortas;
+    for (const torta of tortas) {
+      $(".container-card").append(`
               <div id=${torta.id} class="card">
                 <img
                   class="img-card"
@@ -36,53 +35,52 @@ $.getJSON(productosJSON, function (respuesta, estado) {
               </div>
               `);
 
-        //--------AGREGAR TORTAS AL CARRITO Y MOSTRAR SELECCION
-        $(`#btn${torta.id}`).on("click", function () {
-          //mostrar seleccion
-          let listaTortas = document.getElementById("listado");
-          let seleccionado = document.createElement("tr");
-          seleccionado.innerHTML = `<td>${torta.name}</td>
+      //--------AGREGAR TORTAS AL CARRITO Y MOSTRAR SELECCION
+      $(`#btn${torta.id}`).on("click", function () {
+        //mostrar seleccion
+        let listaTortas = document.getElementById("listado");
+        let seleccionado = document.createElement("tr");
+        seleccionado.innerHTML = `<td>${torta.name}</td>
                               <td>$${torta.precio}</td>
   `;
-          listaTortas.append(seleccionado);
+        listaTortas.append(seleccionado);
 
-          // PUSH AL CARRITO
-          carrito.push(torta);
+        // PUSH AL CARRITO
+        carrito.push(torta);
 
-          //Numero de productos en el carrito
-          $(`#nro-carrito`).ready(function () {
-            let cantidadProducto = document.getElementById("nro-carrito");
-            cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
-          });
+        //Numero de productos en el carrito
+        $(`#nro-carrito`).ready(function () {
+          let cantidadProducto = document.getElementById("nro-carrito");
+          cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
+        });
 
-          //SUMAR TOTAL
-          let total = 0;
-          for (const sumaCarrito of carrito) {
-            total = total + sumaCarrito.precio;
-            console.log(total);
+        //SUMAR TOTAL
+        let total = 0;
+        for (const sumaCarrito of carrito) {
+          total = total + sumaCarrito.precio;
+          console.log(total);
 
-            if (carrito.length != 0) {
-              imprimirTotal.innerHTML = `Total a pagar $${total}`;
-              mostrarTotal.prepend(imprimirTotal);
-            }
+          if (carrito.length != 0) {
+            imprimirTotal.innerHTML = `Total a pagar $${total}`;
+            mostrarTotal.prepend(imprimirTotal);
           }
-        });
+        }
+      });
 
-        //---------------------------ANIMACION-----------------------------------
-        $(`#btn${torta.id}`).on("click", function () {
-          $(`#animacion${torta.id}agregada`)
-            .css("color", "#9932cc", "text-align", "center")
-            .fadeIn(1000)
-            .delay(1000)
-            .fadeOut(1000);
-          $(`#animacion${torta.id}carrito`)
-            .css("color", "#9932cc")
-            .css("text-align", "center")
-            .delay(3000)
-            .fadeIn(1000)
-            .fadeOut(1000);
-        });
-      }
+      //---------------------------ANIMACION-----------------------------------
+      $(`#btn${torta.id}`).on("click", function () {
+        $(`#animacion${torta.id}agregada`)
+          .css("color", "#9932cc", "text-align", "center")
+          .fadeIn(1000)
+          .delay(1000)
+          .fadeOut(1000);
+        $(`#animacion${torta.id}carrito`)
+          .css("color", "#9932cc")
+          .css("text-align", "center")
+          .delay(3000)
+          .fadeIn(1000)
+          .fadeOut(1000);
+      });
     }
   }
 });
@@ -90,10 +88,9 @@ $.getJSON(productosJSON, function (respuesta, estado) {
 // DOM -------------- CARD MINI TORTAS
 $.getJSON(productosJSON, function (respuesta, estado) {
   if (estado === "success") {
-    let miniTortas = respuesta;
-    for (const dato of miniTortas) {
-      for (const mini of dato.miniTortas) {
-        $(".mini-tortas").append(`
+    let miniTortas = respuesta.miniTortas;
+    for (const mini of miniTortas) {
+      $(".mini-tortas").append(`
             <div id=${mini.id} class="card">
               <img
                 class="img-card"
@@ -110,53 +107,52 @@ $.getJSON(productosJSON, function (respuesta, estado) {
             </div>
             `);
 
-        //------------ HACER PUSH AL CARRITO Y MOSTRAR SELECCION
-        $(`#btn${mini.id}`).on("click", function () {
-          //mostrar seleccion
-          let listaTortas = document.getElementById("listado");
-          let seleccionado = document.createElement("tr");
-          seleccionado.innerHTML = `<td>${mini.name}</td>
+      //------------ HACER PUSH AL CARRITO Y MOSTRAR SELECCION
+      $(`#btn${mini.id}`).on("click", function () {
+        //mostrar seleccion
+        let listaTortas = document.getElementById("listado");
+        let seleccionado = document.createElement("tr");
+        seleccionado.innerHTML = `<td>${mini.name}</td>
                               <td>$${mini.precio}</td>
   `;
-          listaTortas.append(seleccionado);
+        listaTortas.append(seleccionado);
 
-          // PUSH AL CARRITO
-          carrito.push(mini);
+        // PUSH AL CARRITO
+        carrito.push(mini);
 
-          //Numero de productos en el carrito
-          $(`#nro-carrito`).ready(function () {
-            let cantidadProducto = document.getElementById("nro-carrito");
-            cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
-          });
+        //Numero de productos en el carrito
+        $(`#nro-carrito`).ready(function () {
+          let cantidadProducto = document.getElementById("nro-carrito");
+          cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
+        });
 
-          //SUMAR TOTAL
-          let total = 0;
-          for (const sumaCarrito of carrito) {
-            total = total + sumaCarrito.precio;
-            console.log(total);
+        //SUMAR TOTAL
+        let total = 0;
+        for (const sumaCarrito of carrito) {
+          total = total + sumaCarrito.precio;
+          console.log(total);
 
-            if (carrito.length != 0) {
-              imprimirTotal.innerHTML = `Total a pagar $${total}`;
-              mostrarTotal.prepend(imprimirTotal);
-            }
+          if (carrito.length != 0) {
+            imprimirTotal.innerHTML = `Total a pagar $${total}`;
+            mostrarTotal.prepend(imprimirTotal);
           }
-        });
+        }
+      });
 
-        //---------------------------ANIMACION-----------------------------------
-        $(`#btn${mini.id}`).on("click", function () {
-          $(`#animacion${mini.id}agregada`)
-            .css("color", "#9932cc", "text-align", "center")
-            .fadeIn(1000)
-            .delay(1000)
-            .fadeOut(1000);
-          $(`#animacion${mini.id}carrito`)
-            .css("color", "#9932cc")
-            .css("text-align", "center")
-            .delay(3000)
-            .fadeIn(1000)
-            .fadeOut(1000);
-        });
-      }
+      //---------------------------ANIMACION-----------------------------------
+      $(`#btn${mini.id}`).on("click", function () {
+        $(`#animacion${mini.id}agregada`)
+          .css("color", "#9932cc", "text-align", "center")
+          .fadeIn(1000)
+          .delay(1000)
+          .fadeOut(1000);
+        $(`#animacion${mini.id}carrito`)
+          .css("color", "#9932cc")
+          .css("text-align", "center")
+          .delay(3000)
+          .fadeIn(1000)
+          .fadeOut(1000);
+      });
     }
   }
 });
@@ -165,10 +161,9 @@ $.getJSON(productosJSON, function (respuesta, estado) {
 
 $.getJSON(productosJSON, function (respuesta, estado) {
   if (estado === "success") {
-    let acompaniamientos = respuesta;
-    for (const dato of acompaniamientos) {
-      for (const producto of dato.acompaniamientos) {
-        $(".acompañamiento").append(`
+    let acompaniamientos = respuesta.acompaniamientos;
+    for (const producto of acompaniamientos) {
+      $(".acompañamiento").append(`
               <div id=${producto.id} class="card">
                 <img
                   class="img-card"
@@ -185,53 +180,52 @@ $.getJSON(productosJSON, function (respuesta, estado) {
               </div>
               `);
 
-        // HACER PUSH AL CARRITO Y MOSTRAR SELECCION
-        $(`#btn${producto.id}`).on("click", function () {
-          //mostrar seleccion
-          let listaTortas = document.getElementById("listado");
-          let seleccionado = document.createElement("tr");
-          seleccionado.innerHTML = `<td>${producto.name}</td>
+      // HACER PUSH AL CARRITO Y MOSTRAR SELECCION
+      $(`#btn${producto.id}`).on("click", function () {
+        //mostrar seleccion
+        let listaTortas = document.getElementById("listado");
+        let seleccionado = document.createElement("tr");
+        seleccionado.innerHTML = `<td>${producto.name}</td>
                                <td>$${producto.precio}</td>
    `;
-          listaTortas.append(seleccionado);
+        listaTortas.append(seleccionado);
 
-          // Push al carrito
-          carrito.push(producto);
+        // Push al carrito
+        carrito.push(producto);
 
-          //Numero de productos en el carrito
-          $(`#nro-carrito`).ready(function () {
-            let cantidadProducto = document.getElementById("nro-carrito");
-            cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
-          });
+        //Numero de productos en el carrito
+        $(`#nro-carrito`).ready(function () {
+          let cantidadProducto = document.getElementById("nro-carrito");
+          cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
+        });
 
-          //SUMAR TOTAL
-          let total = 0;
-          for (const sumaCarrito of carrito) {
-            total = total + sumaCarrito.precio;
-            console.log(total);
+        //SUMAR TOTAL
+        let total = 0;
+        for (const sumaCarrito of carrito) {
+          total = total + sumaCarrito.precio;
+          console.log(total);
 
-            if (carrito.length != 0) {
-              imprimirTotal.innerHTML = `Total a pagar $${total}`;
-              mostrarTotal.prepend(imprimirTotal);
-            }
+          if (carrito.length != 0) {
+            imprimirTotal.innerHTML = `Total a pagar $${total}`;
+            mostrarTotal.prepend(imprimirTotal);
           }
-        });
+        }
+      });
 
-        //---------------------------ANIMACION-----------------------------------
-        $(`#btn${producto.id}`).on("click", function () {
-          $(`#animacion${producto.id}agregada`)
-            .css("color", "#9932cc", "text-align", "center")
-            .fadeIn(1000)
-            .delay(1000)
-            .fadeOut(1000);
-          $(`#animacion${producto.id}carrito`)
-            .css("color", "#9932cc")
-            .css("text-align", "center")
-            .delay(3000)
-            .fadeIn(1000)
-            .fadeOut(1000);
-        });
-      }
+      //---------------------------ANIMACION-----------------------------------
+      $(`#btn${producto.id}`).on("click", function () {
+        $(`#animacion${producto.id}agregada`)
+          .css("color", "#9932cc", "text-align", "center")
+          .fadeIn(1000)
+          .delay(1000)
+          .fadeOut(1000);
+        $(`#animacion${producto.id}carrito`)
+          .css("color", "#9932cc")
+          .css("text-align", "center")
+          .delay(3000)
+          .fadeIn(1000)
+          .fadeOut(1000);
+      });
     }
   }
 });

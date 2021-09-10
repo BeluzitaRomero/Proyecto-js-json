@@ -1,131 +1,129 @@
-[
-  {
-    "tortas": [
-      {
-        "id": 13,
-        "name": "Torta cheesecake",
-        "precio": 3000,
-        "img": "./imagenes/cheesecake.jpg",
-        "alt": "Torta cheesecake"
-      },
-      {
-        "id": 14,
-        "name": "Torta brownie",
-        "precio": 2700,
-        "img": "./imagenes/brownie-2.jpg",
-        "alt": "Torta brownie"
-      },
-      {
-        "id": 15,
-        "name": "Torta oreo",
-        "precio": 3200,
-        "img": "./imagenes/oreo.jpg",
-        "alt": "Torta oreo"
-      },
-      {
-        "id": 16,
-        "name": "Lemon pie",
-        "precio": 2500,
-        "img": "./imagenes/lemon-pie.jpg",
-        "alt": "Lemon pie"
-      },
-      {
-        "id": 17,
-        "name": "Torta dripcake",
-        "precio": 3000,
-        "img": "./imagenes/drip.jpg",
-        "alt": "Torta dripcake"
-      }
-    ],
+{
+  "tortas": [
+    {
+      "id": 13,
+      "name": "Torta cheesecake",
+      "precio": 3000,
+      "img": "./imagenes/cheesecake.jpg",
+      "alt": "Torta cheesecake"
+    },
+    {
+      "id": 14,
+      "name": "Torta brownie",
+      "precio": 2700,
+      "img": "./imagenes/brownie-2.jpg",
+      "alt": "Torta brownie"
+    },
+    {
+      "id": 15,
+      "name": "Torta oreo",
+      "precio": 3200,
+      "img": "./imagenes/oreo.jpg",
+      "alt": "Torta oreo"
+    },
+    {
+      "id": 16,
+      "name": "Lemon pie",
+      "precio": 2500,
+      "img": "./imagenes/lemon-pie.jpg",
+      "alt": "Lemon pie"
+    },
+    {
+      "id": 17,
+      "name": "Torta dripcake",
+      "precio": 3000,
+      "img": "./imagenes/drip.jpg",
+      "alt": "Torta dripcake"
+    }
+  ],
 
-    "miniTortas": [
-      {
-        "id": 1,
-        "name": "Mini cheesecake",
-        "precio": 500,
-        "img": "./imagenes/mini-cheesecake.jpg",
-        "alt": "Torta mini mini-cheesecake"
-      },
-      {
-        "id": 2,
-        "name": "Mini brownie",
-        "precio": 500,
-        "img": "./imagenes/mini-brownie.jpg",
-        "alt": "Torta mini brownie"
-      },
-      {
-        "id": 3,
-        "name": "Mini pastafrola",
-        "precio": 200,
-        "img": "./imagenes/pastafrolas.jpg",
-        "alt": "Mini pastafrola"
-      },
-      {
-        "id": 4,
-        "name": "Mini drip",
-        "precio": 500,
-        "img": "./imagenes/mini-drip.jpg",
-        "alt": "Torta mini dripcake"
-      }
-    ],
+  "miniTortas": [
+    {
+      "id": 1,
+      "name": "Mini cheesecake",
+      "precio": 500,
+      "img": "./imagenes/mini-cheesecake.jpg",
+      "alt": "Torta mini mini-cheesecake"
+    },
+    {
+      "id": 2,
+      "name": "Mini brownie",
+      "precio": 500,
+      "img": "./imagenes/mini-brownie.jpg",
+      "alt": "Torta mini brownie"
+    },
+    {
+      "id": 3,
+      "name": "Mini pastafrola",
+      "precio": 200,
+      "img": "./imagenes/pastafrolas.jpg",
+      "alt": "Mini pastafrola"
+    },
+    {
+      "id": 4,
+      "name": "Mini drip",
+      "precio": 500,
+      "img": "./imagenes/mini-drip.jpg",
+      "alt": "Torta mini dripcake"
+    }
+  ],
 
-    "acompaniamientos": [
-      {
-        "id": 5,
-        "name": "Alfajor frutos rojos x2",
-        "precio": 100,
-        "img": "./imagenes/alfajor-frutos.jpg",
-        "alt": "Alfajor centro frutos rojos"
-      },
-      {
-        "id": 6,
-        "name": "Budín porción x2",
-        "precio": 80,
-        "img": "./imagenes/budin.jpg",
-        "alt": "Budin marmolado"
-      },
-      {
-        "id": 7,
-        "name": "Macarons x2",
-        "precio": 120,
-        "img": "./imagenes/macarons.jpg",
-        "alt": "Macarons"
-      },
-      {
-        "id": 8,
-        "name": "Alfajores de maizena",
-        "precio": 140,
-        "img": "./imagenes/maizena.jpg",
-        "alt": "Bolsa alfajorcitos de maizena"
-      },
-      {
-        "id": 9,
-        "name": "Bizcochos salados",
-        "precio": 100,
-        "img": "./imagenes/bizcochos.jpg",
-        "alt": "Bolsa bizcochos salados"
-      },
-      {
-        "id": 10,
-        "name": "Super muffin con chips",
-        "precio": 80,
-        "img": "./imagenes/super-muffin.jpg",
-        "alt": "Super muffin con chips de chocolate"
-      },
-      {
-        "id": 11,
-        "name": "Alfajor ddl x2",
-        "precio": 120,
-        "img": "./imagenes/box-alfajores.jpg",
-        "alt": "Alfajores de dulce de leche"
-      },
-      {
-        "id": 12,
-        "name": "Cookie rocklet",
-        "precio": 80,
-        "img": "./imagenes/Cookie.jpg",
-        "alt": "Cookie con rocklets de colores"
-      }
-    ]
-  }
-]
+  "acompaniamientos": [
+    {
+      "id": 5,
+      "name": "Alfajor frutos rojos x2",
+      "precio": 100,
+      "img": "./imagenes/alfajor-frutos.jpg",
+      "alt": "Alfajor centro frutos rojos"
+    },
+    {
+      "id": 6,
+      "name": "Budín porción x2",
+      "precio": 80,
+      "img": "./imagenes/budin.jpg",
+      "alt": "Budin marmolado"
+    },
+    {
+      "id": 7,
+      "name": "Macarons x2",
+      "precio": 120,
+      "img": "./imagenes/macarons.jpg",
+      "alt": "Macarons"
+    },
+    {
+      "id": 8,
+      "name": "Alfajores de maizena",
+      "precio": 140,
+      "img": "./imagenes/maizena.jpg",
+      "alt": "Bolsa alfajorcitos de maizena"
+    },
+    {
+      "id": 9,
+      "name": "Bizcochos salados",
+      "precio": 100,
+      "img": "./imagenes/bizcochos.jpg",
+      "alt": "Bolsa bizcochos salados"
+    },
+    {
+      "id": 10,
+      "name": "Super muffin con chips",
+      "precio": 80,
+      "img": "./imagenes/super-muffin.jpg",
+      "alt": "Super muffin con chips de chocolate"
+    },
+    {
+      "id": 11,
+      "name": "Alfajor ddl x2",
+      "precio": 120,
+      "img": "./imagenes/box-alfajores.jpg",
+      "alt": "Alfajores de dulce de leche"
+    },
+    {
+      "id": 12,
+      "name": "Cookie rocklet",
+      "precio": 80,
+      "img": "./imagenes/Cookie.jpg",
+      "alt": "Cookie con rocklets de colores"
+    }
+  ]
+}
