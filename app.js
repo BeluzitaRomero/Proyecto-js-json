@@ -2,23 +2,25 @@ const productosJSON = "productos.json";
 
 const carrito = [];
 
-//Numero de productos en el carrito
-$(`#nro-carrito`).ready(function () {
-  let cantidadProducto = document.getElementById("nro-carrito");
-  cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
-});
-
-//total a pagar
+//variables a usar en las 3 funciones de total a pagar
 let mostrarTotal = document.getElementById("mostrarTotal");
 let imprimirTotal = document.createElement("p");
 
-// DOM ----------------- CARD TORTAS
+function cardTortaYPush() {
+  $.getJSON(productosJSON, function (respuesta, estado) {
+    if (estado === "success") {
+      let tortas = respuesta.tortas;
+      for (const torta of tortas) {
+        renderDOMTorta(torta);
+        mostrarTotalYPushTorta(torta);
+        animacionPushTorta(torta);
+      }
+    }
+  });
+}
 
-$.getJSON(productosJSON, function (respuesta, estado) {
-  if (estado === "success") {
-    let tortas = respuesta.tortas;
-    for (const torta of tortas) {
-      $(".container-card").append(`
+function renderDOMTorta(torta) {
+  $(".container-card").append(`
               <div id=${torta.id} class="card">
                 <img
                   class="img-card"
@@ -34,63 +36,66 @@ $.getJSON(productosJSON, function (respuesta, estado) {
                 </div>
               </div>
               `);
+}
 
-      //--------AGREGAR TORTAS AL CARRITO Y MOSTRAR SELECCION
-      $(`#btn${torta.id}`).on("click", function () {
-        //mostrar seleccion
-        let listaTortas = document.getElementById("listado");
-        let seleccionado = document.createElement("tr");
-        seleccionado.innerHTML = `<td>${torta.name}</td>
-                              <td>$${torta.precio}</td>
-  `;
-        listaTortas.append(seleccionado);
+function mostrarTotalYPushTorta(torta) {
+  //--------AGREGAR TORTAS AL CARRITO Y MOSTRAR SELECCION
+  $(`#btn${torta.id}`).on("click", function () {
+    //mostrar seleccion
+    let listaTortas = document.getElementById("listado");
+    let seleccionado = document.createElement("tr");
+    seleccionado.innerHTML = `<td>${torta.name}</td>
+                          <td>$${torta.precio}</td>
+`;
+    listaTortas.append(seleccionado);
 
-        // PUSH AL CARRITO
-        carrito.push(torta);
+    // PUSH AL CARRITO
+    carrito.push(torta);
 
-        //Numero de productos en el carrito
-        $(`#nro-carrito`).ready(function () {
-          let cantidadProducto = document.getElementById("nro-carrito");
-          cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
-        });
+    //Numero de productos en el carrito
+    $(`#nro-carrito`).ready(function () {
+      let cantidadProducto = document.getElementById("nro-carrito");
+      cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
+    });
 
-        //SUMAR TOTAL
-        let total = 0;
-        for (const sumaCarrito of carrito) {
-          total = total + sumaCarrito.precio;
-          console.log(total);
+    totalAPagar();
+  });
+}
 
-          if (carrito.length != 0) {
-            imprimirTotal.innerHTML = `Total a pagar $${total}`;
-            mostrarTotal.prepend(imprimirTotal);
-          }
-        }
-      });
+function animacionPushTorta(torta) {
+  //---------------------------ANIMACION-----------------------------------
+  $(`#btn${torta.id}`).on("click", function () {
+    $(`#animacion${torta.id}agregada`)
+      .css("color", "#9932cc", "text-align", "center")
+      .fadeIn(1000)
+      .delay(1000)
+      .fadeOut(1000);
+    $(`#animacion${torta.id}carrito`)
+      .css("color", "#9932cc")
+      .css("text-align", "center")
+      .delay(3000)
+      .fadeIn(1000)
+      .fadeOut(1000);
+  });
+}
 
-      //---------------------------ANIMACION-----------------------------------
-      $(`#btn${torta.id}`).on("click", function () {
-        $(`#animacion${torta.id}agregada`)
-          .css("color", "#9932cc", "text-align", "center")
-          .fadeIn(1000)
-          .delay(1000)
-          .fadeOut(1000);
-        $(`#animacion${torta.id}carrito`)
-          .css("color", "#9932cc")
-          .css("text-align", "center")
-          .delay(3000)
-          .fadeIn(1000)
-          .fadeOut(1000);
-      });
+/////////////////////////Mini Tortas///////////////////////////////////
+
+function cardMiniTortaYPush() {
+  $.getJSON(productosJSON, function (respuesta, estado) {
+    if (estado === "success") {
+      let miniTortas = respuesta.miniTortas;
+      for (const mini of miniTortas) {
+        renderDOMMiniTorta(mini);
+        mostrarTotalYPushMiniTorta(mini);
+        animacionPushMiniTorta(mini);
+      }
     }
-  }
-});
+  });
+}
 
-// DOM -------------- CARD MINI TORTAS
-$.getJSON(productosJSON, function (respuesta, estado) {
-  if (estado === "success") {
-    let miniTortas = respuesta.miniTortas;
-    for (const mini of miniTortas) {
-      $(".mini-tortas").append(`
+function renderDOMMiniTorta(mini) {
+  $(".mini-tortas").append(`
             <div id=${mini.id} class="card">
               <img
                 class="img-card"
@@ -106,64 +111,68 @@ $.getJSON(productosJSON, function (respuesta, estado) {
               </div>
             </div>
             `);
+}
 
-      //------------ HACER PUSH AL CARRITO Y MOSTRAR SELECCION
-      $(`#btn${mini.id}`).on("click", function () {
-        //mostrar seleccion
-        let listaTortas = document.getElementById("listado");
-        let seleccionado = document.createElement("tr");
-        seleccionado.innerHTML = `<td>${mini.name}</td>
-                              <td>$${mini.precio}</td>
-  `;
-        listaTortas.append(seleccionado);
+function mostrarTotalYPushMiniTorta(mini) {
+  //------------ HACER PUSH AL CARRITO Y MOSTRAR SELECCION
+  $(`#btn${mini.id}`).on("click", function () {
+    //mostrar seleccion
+    let listaTortas = document.getElementById("listado");
+    let seleccionado = document.createElement("tr");
+    seleccionado.innerHTML = `<td>${mini.name}</td>
+                          <td>$${mini.precio}</td>
+`;
+    listaTortas.append(seleccionado);
 
-        // PUSH AL CARRITO
-        carrito.push(mini);
+    // PUSH AL CARRITO
+    carrito.push(mini);
 
-        //Numero de productos en el carrito
-        $(`#nro-carrito`).ready(function () {
-          let cantidadProducto = document.getElementById("nro-carrito");
-          cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
-        });
+    //Numero de productos en el carrito
+    $(`#nro-carrito`).ready(function () {
+      let cantidadProducto = document.getElementById("nro-carrito");
+      cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
+    });
 
-        //SUMAR TOTAL
-        let total = 0;
-        for (const sumaCarrito of carrito) {
-          total = total + sumaCarrito.precio;
-          console.log(total);
+    totalAPagar();
+  });
+}
 
-          if (carrito.length != 0) {
-            imprimirTotal.innerHTML = `Total a pagar $${total}`;
-            mostrarTotal.prepend(imprimirTotal);
-          }
-        }
-      });
+function animacionPushMiniTorta(mini) {
+  //---------------------------ANIMACION-----------------------------------
+  $(`#btn${mini.id}`).on("click", function () {
+    $(`#animacion${mini.id}agregada`)
+      .css("color", "#9932cc", "text-align", "center")
+      .fadeIn(1000)
+      .delay(1000)
+      .fadeOut(1000);
+    $(`#animacion${mini.id}carrito`)
+      .css("color", "#9932cc")
+      .css("text-align", "center")
+      .delay(3000)
+      .fadeIn(1000)
+      .fadeOut(1000);
+  });
+}
 
-      //---------------------------ANIMACION-----------------------------------
-      $(`#btn${mini.id}`).on("click", function () {
-        $(`#animacion${mini.id}agregada`)
-          .css("color", "#9932cc", "text-align", "center")
-          .fadeIn(1000)
-          .delay(1000)
-          .fadeOut(1000);
-        $(`#animacion${mini.id}carrito`)
-          .css("color", "#9932cc")
-          .css("text-align", "center")
-          .delay(3000)
-          .fadeIn(1000)
-          .fadeOut(1000);
-      });
+/////////////////////////Acompañamientos//////////////////////////
+function cardAcompaniamientoYPush() {
+  $.getJSON(productosJSON, function (respuesta, estado) {
+    if (estado === "success") {
+      let acompaniamientos = respuesta.acompaniamientos;
+      for (const producto of acompaniamientos) {
+        renderDOMAcompaniamiento(producto);
+
+        mostrarTotalYPushAcompaniamiento(producto);
+
+        animacionPushAcompaniamiento(producto);
+      }
     }
-  }
-});
+  });
+}
 
-//DOM ------------ CARD ACOMPAÑAMIENTO
-
-$.getJSON(productosJSON, function (respuesta, estado) {
-  if (estado === "success") {
-    let acompaniamientos = respuesta.acompaniamientos;
-    for (const producto of acompaniamientos) {
-      $(".acompañamiento").append(`
+function renderDOMAcompaniamiento(producto) {
+  //DOM ------------ CARD ACOMPAÑAMIENTO
+  $(".acompañamiento").append(`
               <div id=${producto.id} class="card">
                 <img
                   class="img-card"
@@ -179,56 +188,65 @@ $.getJSON(productosJSON, function (respuesta, estado) {
                 </div>
               </div>
               `);
+}
 
-      // HACER PUSH AL CARRITO Y MOSTRAR SELECCION
-      $(`#btn${producto.id}`).on("click", function () {
-        //mostrar seleccion
-        let listaTortas = document.getElementById("listado");
-        let seleccionado = document.createElement("tr");
-        seleccionado.innerHTML = `<td>${producto.name}</td>
+function mostrarTotalYPushAcompaniamiento(producto) {
+  // HACER PUSH AL CARRITO Y MOSTRAR SELECCION
+  $(`#btn${producto.id}`).on("click", function () {
+    //mostrar seleccion
+    let listaTortas = document.getElementById("listado");
+    let seleccionado = document.createElement("tr");
+    seleccionado.innerHTML = `<td>${producto.name}</td>
                                <td>$${producto.precio}</td>
    `;
-        listaTortas.append(seleccionado);
+    listaTortas.append(seleccionado);
 
-        // Push al carrito
-        carrito.push(producto);
+    // Push al carrito
+    carrito.push(producto);
 
-        //Numero de productos en el carrito
-        $(`#nro-carrito`).ready(function () {
-          let cantidadProducto = document.getElementById("nro-carrito");
-          cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
-        });
+    //Numero de productos en el carrito
+    $(`#nro-carrito`).ready(function () {
+      let cantidadProducto = document.getElementById("nro-carrito");
+      cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
+    });
 
-        //SUMAR TOTAL
-        let total = 0;
-        for (const sumaCarrito of carrito) {
-          total = total + sumaCarrito.precio;
-          console.log(total);
+    totalAPagar();
+  });
+}
 
-          if (carrito.length != 0) {
-            imprimirTotal.innerHTML = `Total a pagar $${total}`;
-            mostrarTotal.prepend(imprimirTotal);
-          }
-        }
-      });
+function animacionPushAcompaniamiento(producto) {
+  //---------------------------ANIMACION-----------------------------------
+  $(`#btn${producto.id}`).on("click", function () {
+    $(`#animacion${producto.id}agregada`)
+      .css("color", "#9932cc", "text-align", "center")
+      .fadeIn(1000)
+      .delay(1000)
+      .fadeOut(1000);
+    $(`#animacion${producto.id}carrito`)
+      .css("color", "#9932cc")
+      .css("text-align", "center")
+      .delay(3000)
+      .fadeIn(1000)
+      .fadeOut(1000);
+  });
+}
 
-      //---------------------------ANIMACION-----------------------------------
-      $(`#btn${producto.id}`).on("click", function () {
-        $(`#animacion${producto.id}agregada`)
-          .css("color", "#9932cc", "text-align", "center")
-          .fadeIn(1000)
-          .delay(1000)
-          .fadeOut(1000);
-        $(`#animacion${producto.id}carrito`)
-          .css("color", "#9932cc")
-          .css("text-align", "center")
-          .delay(3000)
-          .fadeIn(1000)
-          .fadeOut(1000);
-      });
+/////////////////////TOTAL//////////////////////////
+function totalAPagar() {
+  //SUMAR TOTAL
+  let total = 0;
+  for (const sumaCarrito of carrito) {
+    total = total + sumaCarrito.precio;
+    console.log(total);
+
+    if (carrito.length != 0) {
+      imprimirTotal.innerHTML = `Total a pagar $${total}`;
+      mostrarTotal.prepend(imprimirTotal);
     }
   }
-});
+}
+
+///////////////////////////////////////////////
 
 // -----------------------------OBJETO CLIENTE
 class Cliente {
@@ -241,15 +259,21 @@ class Cliente {
   }
 }
 
-//---------------------LISTA CARRITO
+function mostrarListaYCantidadEnCarrito() {
+  $(document).ready(function () {
+    $("#carrito-modal").hide();
 
-$(document).ready(function () {
-  $("#carrito-modal").hide();
-
-  $("#carrito-toggle").click(function () {
-    $("#carrito-modal").toggle("fast");
+    $("#carrito-toggle").click(function () {
+      $("#carrito-modal").toggle("fast");
+    });
   });
-});
+
+  //Numero de productos en el carrito
+  $(`#nro-carrito`).ready(function () {
+    let cantidadProducto = document.getElementById("nro-carrito");
+    cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
+  });
+}
 
 // MODAL DE REGISTRO DE USUARIO
 const abrirModal = document.getElementById("registrar-compra");
@@ -303,3 +327,8 @@ function registrarDatos(e) {
 
   location.reload();
 }
+cardTortaYPush();
+cardMiniTortaYPush();
+cardAcompaniamientoYPush();
+
+mostrarListaYCantidadEnCarrito();
