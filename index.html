@@ -22,31 +22,27 @@
       <div class="modal">
         <h2>Ingresá tus datos</h2>
         <form id="myForm" action="">
-          <label>Nombre y apellido: </label>
-          <input type="text" id="nombreApellido" required />
-          <br />
-          <label>DNI: </label>
-          <input type="number" id="dni" required />
-          <br />
-          <label>Telefono: </label>
-          <input type="tel" id="tel" required />
-          <br />
-          <label>Email: </label>
-          <input type="email" id="email" required />
-          <br />
+          <div class="datos">
+            <label>Nombre y apellido: </label>
+            <input type="text" id="nombreApellido" required />
+            <label>DNI: </label>
+            <input type="number" id="dni" required />
+            <label>Telefono: </label>
+            <input type="tel" id="tel" required />
+            <label>Email: </label>
+            <input type="email" id="email" required />
+          </div>
           <div
+            class="pago"
             style="display: flex; flex-direction: column; align-items: center"
           >
             <label>Medio de pago:</label>
-            <br />
             <div style="display: flex">
               <label for="">Debito</label>
               <input type="radio" name="tarjeta" id="" checked />
-              <br />
               <label for="">Credito</label>
               <input type="radio" name="tarjeta" id="" />
             </div>
-            <br />
             <label for="nro-tarjeta">Numero de tarjeta (sin espacios)</label>
             <input
               type="text"
@@ -56,7 +52,6 @@
               autocomplete="off"
               required
             />
-            <br />
             <label for="codigo-seguridad">Cod.Seguridad</label>
             <input
               type="number"
