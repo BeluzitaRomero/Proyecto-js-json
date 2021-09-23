@@ -1,10 +1,21 @@
 const productosJSON = "productos.json";
 
-const carrito = [];
-
 //variables a usar en las 3 funciones de total a pagar
 let mostrarTotal = document.getElementById("mostrarTotal");
 let imprimirTotal = document.createElement("p");
+
+// ---------------------------- CLIENTE
+class Cliente {
+  constructor(dni, nombre, telefono, email, pedido) {
+    this.dni = dni;
+    this.nombres = nombre;
+    this.telefono = telefono;
+    this.email = email;
+    this.pedido = pedido;
+  }
+}
+
+const carrito = [];
 
 function cardTortaYPush() {
   $.getJSON(productosJSON, function (respuesta, estado) {
@@ -13,6 +24,7 @@ function cardTortaYPush() {
       for (const torta of tortas) {
         renderDOMTorta(torta);
         mostrarTotalYPushTorta(torta);
+        //eliminarTorta(torta);
         animacionPushTorta(torta);
       }
     }
@@ -44,21 +56,28 @@ function mostrarTotalYPushTorta(torta) {
     //mostrar seleccion
     let listaTortas = document.getElementById("listado");
     let seleccionado = document.createElement("tr");
-    seleccionado.innerHTML = `<td>${torta.name}</td>
-                          <td>$${torta.precio}</td>
+    seleccionado.classList.add(`lista${torta.id}`);
+    seleccionado.innerHTML = `<td><img src="${torta.img}" width=40 style="margin: .5rem; border-radius: .5rem"></td>
+                              <td> ${torta.name}</td> 
+                              <td>$${torta.precio}</td>
+                              <td><button id="eliminar${torta.id}">X</button></td>
 `;
+
     listaTortas.append(seleccionado);
 
     // PUSH AL CARRITO
     carrito.push(torta);
+    console.log(carrito);
 
-    //Numero de productos en el carrito
-    $(`#nro-carrito`).ready(function () {
-      let cantidadProducto = document.getElementById("nro-carrito");
-      cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
-    });
+    numeroEnCarrito();
+
+    eliminarTorta(torta);
+
+    botonRegistrarCompra();
 
     totalAPagar();
+
+    //botonRegistrarCompra();
   });
 }
 
@@ -76,6 +95,27 @@ function animacionPushTorta(torta) {
       .delay(3000)
       .fadeIn(1000)
       .fadeOut(1000);
+  });
+}
+
+function eliminarTorta(torta) {
+  $(`#eliminar${torta.id}`).on("click", function (e) {
+    const boton = e.target;
+    console.log(boton); //para ver que me esta tomando con el click
+
+    const productoSeleccionado = carrito.find((p) => p.id === torta.id);
+    const indexDelProductoSeleccionado = carrito.indexOf(productoSeleccionado);
+    console.log(indexDelProductoSeleccionado);
+
+    carrito.splice(indexDelProductoSeleccionado, 1);
+    console.log(carrito);
+
+    //Borrar en lista
+    $(`.lista${torta.id}`).remove();
+
+    numeroEnCarrito();
+
+    totalAPagar();
   });
 }
 
@@ -119,21 +159,45 @@ function mostrarTotalYPushMiniTorta(mini) {
     //mostrar seleccion
     let listaTortas = document.getElementById("listado");
     let seleccionado = document.createElement("tr");
-    seleccionado.innerHTML = `<td>${mini.name}</td>
-                          <td>$${mini.precio}</td>
+    seleccionado.classList.add(`lista${mini.id}`);
+    seleccionado.innerHTML = `<td><img src="${mini.img}" width=40 style="margin: .5rem; border-radius: .5rem"></td>
+                              <td> ${mini.name}</td>  
+                              <td>$${mini.precio}</td>
+                              <td><button id="eliminar${mini.id}">X</button></td>
 `;
     listaTortas.append(seleccionado);
 
     // PUSH AL CARRITO
     carrito.push(mini);
 
-    //Numero de productos en el carrito
-    $(`#nro-carrito`).ready(function () {
-      let cantidadProducto = document.getElementById("nro-carrito");
-      cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
-    });
+    numeroEnCarrito();
+
+    eliminarMiniTorta(mini);
+
+    botonRegistrarCompra();
 
     totalAPagar();
+  });
+}
+
+function eliminarMiniTorta(mini) {
+  $(`#eliminar${mini.id}`).on("click", function (e) {
+    const boton = e.target;
+    console.log(boton); //para ver que me esta tomando con el click
+
+    const productoSeleccionado = carrito.find((p) => p.id === mini.id);
+
+    const indexDelProductoSeleccionado = carrito.indexOf(productoSeleccionado);
+
+    carrito.splice(indexDelProductoSeleccionado, 1);
+    console.log(carrito);
+
+    //Borrar en lista
+    $(`.lista${mini.id}`).remove();
+
+    totalAPagar();
+
+    numeroEnCarrito();
   });
 }
 
@@ -191,26 +255,50 @@ function renderDOMAcompaniamiento(producto) {
 }
 
 function mostrarTotalYPushAcompaniamiento(producto) {
-  // HACER PUSH AL CARRITO Y MOSTRAR SELECCION
+  //------------ HACER PUSH AL CARRITO Y MOSTRAR SELECCION
   $(`#btn${producto.id}`).on("click", function () {
     //mostrar seleccion
     let listaTortas = document.getElementById("listado");
     let seleccionado = document.createElement("tr");
-    seleccionado.innerHTML = `<td>${producto.name}</td>
-                               <td>$${producto.precio}</td>
-   `;
+    seleccionado.classList.add(`lista${producto.id}`);
+    seleccionado.innerHTML = `<td><img src="${producto.img}" width=40 style="margin: .5rem; border-radius: .5rem"></td>
+                              <td> ${producto.name}</td>  
+                              <td>$${producto.precio}</td>
+                              <td><button id="eliminar${producto.id}">X</button></td>
+`;
     listaTortas.append(seleccionado);
 
-    // Push al carrito
+    // PUSH AL CARRITO
     carrito.push(producto);
 
-    //Numero de productos en el carrito
-    $(`#nro-carrito`).ready(function () {
-      let cantidadProducto = document.getElementById("nro-carrito");
-      cantidadProducto.innerHTML = `<p id="nro-carrito">${carrito.length}</p>`;
-    });
+    numeroEnCarrito();
+
+    eliminarAcompaniamiento(producto);
+
+    botonRegistrarCompra();
 
     totalAPagar();
+  });
+}
+
+function eliminarAcompaniamiento(producto) {
+  $(`#eliminar${producto.id}`).on("click", function (e) {
+    const boton = e.target;
+    console.log(boton); //para ver que me esta tomando con el click
+
+    const productoSeleccionado = carrito.find((p) => p.id === producto.id);
+
+    const indexDelProductoSeleccionado = carrito.indexOf(productoSeleccionado);
+
+    carrito.splice(indexDelProductoSeleccionado, 1);
+    console.log(carrito);
+
+    //Borrar en lista
+    $(`.lista${producto.id}`).remove();
+
+    totalAPagar();
+
+    numeroEnCarrito();
   });
 }
 
@@ -230,44 +318,17 @@ function animacionPushAcompaniamiento(producto) {
       .fadeOut(1000);
   });
 }
-
-/////////////////////TOTAL//////////////////////////
-function totalAPagar() {
-  //SUMAR TOTAL
-  let total = 0;
-  for (const sumaCarrito of carrito) {
-    total = total + sumaCarrito.precio;
-    console.log(total);
-
-    if (carrito.length != 0) {
-      imprimirTotal.innerHTML = `Total a pagar $${total}`;
-      mostrarTotal.prepend(imprimirTotal);
-    }
+//////BOTON DE REGISTRO DE COMPRA
+function botonRegistrarCompra() {
+  if (carrito != 0) {
+    $(`#registrar-compra`).css("visibility", "visible");
+  } else if (carrito === 0) {
+    $(`#registrar-compra`).css("visibility", "hidden");
   }
 }
 
-///////////////////////////////////////////////
-
-// -----------------------------OBJETO CLIENTE
-class Cliente {
-  constructor(dni, nombre, telefono, email, pedido) {
-    this.dni = dni;
-    this.nombres = nombre;
-    this.telefono = telefono;
-    this.email = email;
-    this.pedido = pedido;
-  }
-}
-
-function mostrarListaYCantidadEnCarrito() {
-  $(document).ready(function () {
-    $("#carrito-modal").hide();
-
-    $("#carrito-toggle").click(function () {
-      $("#carrito-modal").toggle("fast");
-    });
-  });
-
+////////////////////NUMERO EN CARRITO///////////////
+function numeroEnCarrito() {
   //Numero de productos en el carrito
   $(`#nro-carrito`).ready(function () {
     let cantidadProducto = document.getElementById("nro-carrito");
@@ -275,60 +336,111 @@ function mostrarListaYCantidadEnCarrito() {
   });
 }
 
-// MODAL DE REGISTRO DE USUARIO
-const abrirModal = document.getElementById("registrar-compra");
-const modalContainer = document.getElementById("modal_container");
-const cerrarModal = document.getElementById("cerrar-modal");
+/////////////////////TOTAL//////////////////////////
+function totalAPagar() {
+  //actualizar total
+  if (carrito == 0) {
+    imprimirTotal.innerHTML = `Total a pagar $0`;
+    mostrarTotal.prepend(imprimirTotal);
+  } else {
+    let total = 0;
+    for (const sumaCarrito of carrito) {
+      total = total + sumaCarrito.precio;
+      //console.log(total);
 
-abrirModal.addEventListener("click", () => {
-  modalContainer.classList.add("show");
-  $("#carrito-modal").hide();
-});
-
-cerrarModal.addEventListener("click", modalClose);
-
-function modalClose() {
-  modalContainer.classList.remove("show");
+      if (carrito.length != 0) {
+        imprimirTotal.innerHTML = `Total a pagar $${total}`;
+        mostrarTotal.prepend(imprimirTotal);
+      }
+    }
+  }
 }
 
-//-----------------FORMULARIO
-let formSubmit = document.getElementById("myForm");
+///////////////////////////////////////////////
 
-formSubmit.addEventListener("submit", registrarDatos);
+function mostrarListaYCantidadEnCarrito() {
+  $(document).ready(function () {
+    $("#carrito-modal").hide();
 
-function registrarDatos(e) {
-  e.preventDefault();
+    $(".img-carrito").click(function () {
+      $("#carrito-modal").toggle("fast");
+    });
+  });
 
-  let formulario = e.target;
-
-  let nomApeIngresado = document.getElementById("nombreApellido").value;
-
-  let dniIngresado = document.getElementById("dni").value;
-
-  let telIngresado = document.getElementById("tel").value;
-
-  let emailIngresado = document.getElementById("email").value;
-
-  let cliente = new Cliente(
-    dniIngresado,
-    nomApeIngresado,
-    telIngresado,
-    emailIngresado,
-    carrito
-  );
-
-  localStorage.setItem(1, JSON.stringify(cliente));
-
-  console.log(JSON.parse(localStorage.getItem(1)));
-
-  formulario.reset();
-
-  modalClose();
-
-  location.reload();
+  numeroEnCarrito();
 }
+
+function registrarCompra() {
+  // MODAL DE REGISTRO DE USUARIO
+  const abrirModal = document.getElementById("registrar-compra");
+  const modalContainer = document.getElementById("modal_container");
+  const cerrarModal = document.getElementById("cerrar-modal");
+
+  abrirModal.addEventListener("click", () => {
+    modalContainer.classList.add("show");
+    $("#carrito-modal").hide();
+  });
+
+  cerrarModal.addEventListener("click", modalClose);
+
+  function modalClose() {
+    modalContainer.classList.remove("show");
+  }
+
+  //-----------------FORMULARIO
+  let formSubmit = document.getElementById("myForm");
+
+  formSubmit.addEventListener("submit", registrarDatos);
+
+  function registrarDatos(e) {
+    e.preventDefault();
+
+    let formulario = e.target;
+
+    let nomApeIngresado = document.getElementById("nombreApellido").value;
+
+    let dniIngresado = document.getElementById("dni").value;
+
+    let telIngresado = document.getElementById("tel").value;
+
+    let emailIngresado = document.getElementById("email").value;
+
+    let cliente = new Cliente(
+      dniIngresado,
+      nomApeIngresado,
+      telIngresado,
+      emailIngresado,
+      carrito
+    );
+
+    let finalizarCompra = prompt("¿Desea finalizar su compra?(si / no)");
+
+    if (finalizarCompra === "si") {
+      localStorage.setItem(1, JSON.stringify(cliente));
+
+      console.log(JSON.parse(localStorage.getItem(1)));
+
+      formulario.reset();
+
+      modalClose();
+
+      location.reload();
+    } else if (finalizarCompra === "no") {
+      modalClose();
+    } else {
+      alert("Su respuesta no es valida");
+      location.reload();
+    }
+  }
+}
+
+//-----------TARJETAS Y FUNCIONES PUSH
 cardTortaYPush();
 cardMiniTortaYPush();
 cardAcompaniamientoYPush();
 
+//------------LISTA DE COMPRAS
 mostrarListaYCantidadEnCarrito();
+
+//------------REGISTRO DE COMPRA
+registrarCompra();

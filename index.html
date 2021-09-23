@@ -14,7 +14,6 @@
       </div>
       <nav>
         <div id="div-carrito"><p id="nro-carrito"></p></div>
-        <button id="carrito-toggle">mostrar carrito</button>
         <img class="img-carrito" src="imagenes/carrito-de-compras.png" alt="" />
       </nav>
     </header>
@@ -34,6 +33,42 @@
           <br />
           <label>Email: </label>
           <input type="email" id="email" required />
+          <br />
+          <div
+            style="display: flex; flex-direction: column; align-items: center"
+          >
+            <label>Medio de pago:</label>
+            <br />
+            <div style="display: flex">
+              <label for="">Debito</label>
+              <input type="radio" name="tarjeta" id="" checked />
+              <br />
+              <label for="">Credito</label>
+              <input type="radio" name="tarjeta" id="" />
+            </div>
+            <br />
+            <label for="nro-tarjeta">Numero de tarjeta (sin espacios)</label>
+            <input
+              type="text"
+              name="nro-tarjeta"
+              id="numeroTarjeta"
+              maxlength="16"
+              autocomplete="off"
+              required
+            />
+            <br />
+            <label for="codigo-seguridad">Cod.Seguridad</label>
+            <input
+              type="number"
+              name="codigo-seguridad"
+              id="codigoSeguridad"
+              style="width: 3rem"
+              autocomplete="off"
+              required
+            />
+            <br />
+          </div>
+
           <div>
             <button type="submit" id="btnSubmit">Enviar</button>
             <button id="cerrar-modal">Cerrar</button>
@@ -46,15 +81,19 @@
         <div id="carrito-total">
           <table id="listado">
             <thead>
+              <th></th>
               <th>Producto</th>
               <th>Precio</th>
+              <th></th>
             </thead>
           </table>
         </div>
         <div id="carrito">
           <div id="mostrarTotal">
             <div>
-              <button id="registrar-compra">Registrar compra</button>
+              <button id="registrar-compra" style="visibility: hidden">
+                Registrar compra
+              </button>
             </div>
           </div>
         </div>
