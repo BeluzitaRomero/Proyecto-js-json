@@ -413,9 +413,9 @@ function registrarCompra() {
       carrito
     );
 
-    let finalizarCompra = prompt("¿Desea finalizar su compra?(si / no)");
+    let finalizarCompra = confirm("¿Desea finalizar su compra?");
 
-    if (finalizarCompra === "si") {
+    if (finalizarCompra) {
       localStorage.setItem(1, JSON.stringify(cliente));
 
       console.log(JSON.parse(localStorage.getItem(1)));
@@ -424,12 +424,15 @@ function registrarCompra() {
 
       modalClose();
 
+      alert(
+        `¡Tu compra se ha realizado con exito! 
+        Nos comunicaremos a la brevedad para acordar el horario de retiro. \n 
+        Gracias por elegir Almacen de cosas dulces ♥`
+      );
+
       location.reload();
-    } else if (finalizarCompra === "no") {
-      modalClose();
     } else {
-      alert("Su respuesta no es valida");
-      location.reload();
+      modalClose();
     }
   }
 }
