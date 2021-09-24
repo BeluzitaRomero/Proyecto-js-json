@@ -43,22 +43,34 @@
               <label for="">Credito</label>
               <input type="radio" name="tarjeta" id="" />
             </div>
-            <label for="nro-tarjeta">Numero de tarjeta (sin espacios)</label>
+            <label for="credit-number">Numero de tarjeta (sin espacios)</label>
             <input
               type="text"
-              name="numeroTarjeta"
-              id="numeroTarjeta"
-              onkeypress="return soloNumeros(event)"
+              name="credit-number"
+              class="cc-number"
+              pattern="\d*"
               maxlength="16"
-              min="0"
+              placeholder="XXXXXXXXXXXXXXXX"
+              onkeypress="return soloNumeros(event)"
               autocomplete="off"
               required
+            />
+            <label for="">Val:</label>
+            <input
+              name="credit-expires"
+              class="cc-expires"
+              type="text"
+              maxlength="5"
+              placeholder="MM / AA"
+              style="width: 4rem"
+              onkeypress="return soloNumerosYBarra(event)"
             />
             <label for="codigo-seguridad">Cod.Seguridad</label>
             <input
               type="text"
               name="codigo-seguridad"
               id="codigoSeguridad"
+              placeholder="CVC"
               style="width: 3rem"
               onkeypress="return soloNumeros(event)"
               maxlength="3"

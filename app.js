@@ -418,9 +418,7 @@ function registrarCompra() {
       modalClose();
 
       alert(
-        `¡Tu compra se ha realizado con exito! 
-        Nos comunicaremos a la brevedad para acordar el horario de retiro. \n 
-        Gracias por elegir Almacen de cosas dulces ♥`
+        `¡Tu compra se ha realizado con exito! \n Nos comunicaremos a la brevedad para acordar el horario de retiro. \n Gracias por elegir Almacen de cosas dulces ♥`
       );
 
       location.reload();
