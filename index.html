@@ -45,19 +45,23 @@
             </div>
             <label for="nro-tarjeta">Numero de tarjeta (sin espacios)</label>
             <input
-              type="number"
-              name="nro-tarjeta"
+              type="text"
+              name="numeroTarjeta"
               id="numeroTarjeta"
+              onkeypress="return soloNumeros(event)"
+              maxlength="16"
               min="0"
               autocomplete="off"
               required
             />
             <label for="codigo-seguridad">Cod.Seguridad</label>
             <input
-              type="number"
+              type="text"
               name="codigo-seguridad"
               id="codigoSeguridad"
               style="width: 3rem"
+              onkeypress="return soloNumeros(event)"
+              maxlength="3"
               autocomplete="off"
               min="0"
               required
@@ -124,6 +128,7 @@
       <h3 class="subtitulo">Acompañamientos</h3>
       <div class="acompañamiento"></div>
     </section>
+    <script src="validaciones.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="app.js"></script>
   </body>

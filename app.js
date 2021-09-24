@@ -24,7 +24,6 @@ function cardTortaYPush() {
       for (const torta of tortas) {
         renderDOMTorta(torta);
         mostrarTotalYPushTorta(torta);
-        //eliminarTorta(torta);
         animacionPushTorta(torta);
       }
     }
@@ -76,8 +75,6 @@ function mostrarTotalYPushTorta(torta) {
     botonRegistrarCompra();
 
     totalAPagar();
-
-    //botonRegistrarCompra();
   });
 }
 
@@ -318,7 +315,7 @@ function animacionPushAcompaniamiento(producto) {
       .fadeOut(1000);
   });
 }
-//////BOTON DE REGISTRO DE COMPRA
+//------------------Compra-registro-carrito------------------
 function botonRegistrarCompra() {
   if (carrito != 0) {
     $(`#registrar-compra`).css("visibility", "visible");
@@ -327,7 +324,6 @@ function botonRegistrarCompra() {
   }
 }
 
-////////////////////NUMERO EN CARRITO///////////////
 function numeroEnCarrito() {
   //Numero de productos en el carrito
   $(`#nro-carrito`).ready(function () {
@@ -336,7 +332,6 @@ function numeroEnCarrito() {
   });
 }
 
-/////////////////////TOTAL//////////////////////////
 function totalAPagar() {
   //actualizar total
   if (carrito == 0) {
@@ -355,8 +350,6 @@ function totalAPagar() {
     }
   }
 }
-
-///////////////////////////////////////////////
 
 function mostrarListaYCantidadEnCarrito() {
   $(document).ready(function () {
