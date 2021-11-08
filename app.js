@@ -317,10 +317,10 @@ function animacionPushAcompaniamiento(producto) {
 }
 //------------------Compra-registro-carrito------------------
 function botonRegistrarCompra() {
-  if (carrito.length != 0) {
+  if (carrito != 0) {
     $(`#registrar-compra`).css("visibility", "visible");
-  } else if (carrito.length === 0) {
-    $(`#registrar-compra`).css("visibility", "hidden");
+  } else if (carrito === 0) {
+    $(`#registrar-compra`).hide();
   }
 }
 
