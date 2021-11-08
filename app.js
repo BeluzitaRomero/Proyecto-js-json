@@ -317,9 +317,9 @@ function animacionPushAcompaniamiento(producto) {
 }
 //------------------Compra-registro-carrito------------------
 function botonRegistrarCompra() {
-  if (carrito != 0) {
+  if (carrito.length != 0) {
     $(`#registrar-compra`).css("visibility", "visible");
-  } else if (carrito === 0) {
+  } else if (carrito.length === 0) {
     $(`#registrar-compra`).css("visibility", "hidden");
   }
 }
