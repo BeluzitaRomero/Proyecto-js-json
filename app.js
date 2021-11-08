@@ -320,7 +320,7 @@ function botonRegistrarCompra() {
   if (carrito != 0) {
     $(`#registrar-compra`).css("visibility", "visible");
   } else if (carrito === 0) {
-    $(`#registrar-compra`).hide();
+    $(`#registrar-compra`).css("visibility", "hidden");
   }
 }
 
