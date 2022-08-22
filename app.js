@@ -4,7 +4,7 @@ const productosJSON = "productos.json";
 let mostrarTotal = document.getElementById("mostrarTotal");
 let imprimirTotal = document.createElement("p");
 
-// ---------------------------- CLIENTE
+// -------------------------- CLIENTE
 class Cliente {
   constructor(dni, nombre, telefono, email, pedido) {
     this.dni = dni;
